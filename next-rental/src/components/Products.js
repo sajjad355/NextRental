@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import data from '../data.json';
-import { Modal } from 'react-bootstrap';
-import { Form, Button, FormGroup, InputGroup, FormControl, ControlLabel } from "react-bootstrap";
-
+import { Modal, Form, Button } from "react-bootstrap";
 import "./style.css"
-import "./modal.css"
 import {
     MDBNavbar,
     MDBNavbarNav,
@@ -35,6 +32,19 @@ export default function App() {
     const [fromDate, setFromdate] = useState("");
     const [toDate, setToDate] = useState("");
 
+    const [day, setDay] = useState("");
+
+    useEffect(() => {
+        if (day == "") {
+            setDay(1);
+        }
+        setTimeout(function () {
+            var a = day + 1;
+            setDay(a);
+        }.bind(this), 1000);
+
+    }, [])
+
     function toggleModal() {
         setIsOpen(!isOpen);
     }
@@ -58,7 +68,7 @@ export default function App() {
     function toggleModalReturnValue() {
         if (product && amount) {
             setIsOpenReturnvalue(!isOpenReturnValue);
-            var a = data.filter(item => item.name === product)
+            var a = data.filter(item => item.name + "/" + item.code === product)
             setamountPreview(a[0].price * amount);
             setRepair(a[0].needing_repair === "false" ? "No" : "Yes");
             setRentPeriod(a[0].minimum_rent_period);
@@ -67,12 +77,15 @@ export default function App() {
             alert("Please Fill all the required Fields");
         }
     }
+    function toggleBookingValueCancel() {
+        setIsOpenBookingvalue(!isOpenBookingValue);
+    }
     function toggleModalBookingValue() {
         if (productBooking && fromDate && toDate) {
             var currentDate = new Date();
             console.log(currentDate);
             var startingDate = new Date(fromDate);
-            var a = data.filter(item => item.name === productBooking)
+            var a = data.filter(item => item.name + "/" + item.code === productBooking)
             const date1 = new Date(toDate);
             const date2 = new Date(fromDate);
             const diffTime = Math.abs(date2 - date1);
@@ -94,7 +107,7 @@ export default function App() {
         }
     }
     return (
-        <div className="App">
+        <div className="App">{console.log(day)}
             <header style={{ backgroundColor: '#2621a0', marginBottom: 30, marginLeft: 0, width: '100%' }}>
                 <MDBNavbar expand='lg' >
                     <MDBContainer fluid>
@@ -182,7 +195,7 @@ export default function App() {
                                 <td>{m.needing_repair === true ? "Yes" : "No"}</td>
                                 <td>{m.durability}</td>
                                 <td>{m.max_durability}</td>
-                                <td>{m.mileage === "" || m.mileage === null ? "N/A" : m.mileage}</td>
+                                <td>{m.mileage === "" || m.mileage === null ? "N/A" : m.mileage + day * 10}</td>
                                 <td>{m.price}</td>
                                 <td>{m.minimum_rent_period}</td>
                             </tr>
@@ -202,7 +215,6 @@ export default function App() {
             <Modal
                 show={isOpen ? true : false}
                 onRequestClose={toggleModal}
-                style={{ marginTop: 100 }}
                 contentLabel="My dialog"
             >
                 <Modal.Header>
@@ -224,11 +236,21 @@ export default function App() {
 
                         {data.map((val) => (
                             <option text={val.code}>
-                                {val.name}
+                                {val.name}/{val.code}
                             </option>
                         ))}
                     </select>
                     <br />
+                    {/* Information Start */}
+                    {data.filter(product => product.name + "/" + product.code === productBooking).map(products => (
+                        <p style={{ fontSize: 22, fontFamily: "Lucida Console" }}>
+                            <p>Name:&nbsp;{products.name}</p>
+                            <p>Rental Period:&nbsp;{products.minimum_rent_period}</p>{console.log(products.mileage)}
+                            <p>Mileage:&nbsp;{products.mileage === null ? "N/A" : products.mileage}</p>
+                            <p>Repair Needed:&nbsp;{products.needing_repair === true ? "Yes" : "No"}</p>
+                        </p>
+                    ))}
+                    {/* Information End */}
                     <span style={{ fontSize: 18, fontFamily: "Lucida Console" }} >FROM</span><span style={{ color: 'red' }}>*</span> &nbsp;
 
                     {/* <input
@@ -263,8 +285,10 @@ export default function App() {
                 </Modal.Body>
                 <br /><br />
                 <Modal.Footer>
-                    <button onClick={toggleModalBookingValue} style={{ fontSize: 18, width: 105, fontFamily: "Lucida Console", height: 30, marginBottom: 10, marginLeft: 357, backgroundColor: '#2621a0', color: 'white' }}>Book Now</button><br />
-                    <button onClick={toggleModal} style={{ fontSize: 18, fontFamily: "Lucida Console", width: 105, height: 30, marginLeft: 357, background: 'red', color: 'white' }}>Close</button><br />
+                    <button onClick={toggleModalBookingValue} style={{ width: 108, fontSize: 18, fontFamily: "Lucida Console", height: 30, marginBottom: 10, backgroundColor: '#2621a0', color: 'white' }}>Book Now</button>
+                    &nbsp;
+                    <button onClick={toggleModal} style={{ width: 108, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 30, background: 'red', color: 'white' }}>Close</button>
+
                 </Modal.Footer>
             </Modal>
             {/* Book Product Initialize */}
@@ -274,7 +298,6 @@ export default function App() {
                 show={isOpenBookingValue ? true : false}
                 onRequestClose={toggleModalBookingValue}
                 contentLabel="My dialog"
-                style={{ marginTop: 100 }}
             >
                 <Modal.Header>
                     <div><span style={{ fontSize: 20, fontFamily: "Lucida Console", fontWeight: 'bold' }} >BOOK A PRODUCT</span></div>
@@ -294,7 +317,11 @@ export default function App() {
 
                 <Modal.Footer>
                     <span style={{ fontsize: 22, fontFamily: "Lucida Console" }}>DO you want to procedure?</span> <br /><br />
-                    <button onClick={toggleModalBookingValueComplted} style={{ fontSize: 18, fontFamily: "Lucida Console", height: 30, marginBottom: 10, marginLeft: 200, backgroundColor: '#2621a0', color: 'white' }}>PROCEED</button><br />
+                    {/* <button onClick={toggleModalBookingValueComplted} style={{ fontSize: 18, fontFamily: "Lucida Console", height: 30, marginBottom: 10, marginLeft: 200, backgroundColor: '#2621a0', color: 'white' }}>Yes</button><br /> */}
+
+                    <button onClick={toggleModalBookingValueComplted} style={{ width: 47, fontSize: 18, fontFamily: "Lucida Console", height: 30, marginBottom: 10, backgroundColor: '#2621a0', marginLeft: 360, color: 'white' }}>Yes</button>
+                    &nbsp;
+                    <button onClick={toggleBookingValueCancel} style={{ width: 47, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 30, background: 'red', color: 'white' }}>No</button>
                 </Modal.Footer>
             </Modal>
             {/* Estimated Price After Booking Product */}
@@ -333,7 +360,7 @@ export default function App() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div><span style={{ fontSize: 18, fontFamily: "Lucida Console" }} >Select a product</span><span style={{ color: 'red' }}>*</span></div>
+                    <div><span style={{ fontSize: 19, fontFamily: "Lucida Console" }} >SELECT PRODUCT</span><span style={{ color: 'red' }}>*</span></div>
 
                     <select
                         className="form-control"
@@ -347,12 +374,23 @@ export default function App() {
 
                         {data.map((val) => (
                             <option text={val.code}>
-                                {val.name}
+                                {val.name}/{val.code}
                             </option>
                         ))}
                     </select>
                     <br />
-                    <div><span style={{ fontSize: 18, fontFamily: "Lucida Console" }} >Used Mileage</span><span style={{ color: 'red' }}>*</span></div>
+                    {/* Information Start */}
+                    {console.log(product)}
+                    {data.filter(allProduct => allProduct.name + "/" + allProduct.code === product).map(products => (
+                        <p style={{ fontSize: 22, fontFamily: "Lucida Console" }}>
+                            <p>Name:&nbsp;{products.name}</p>
+                            <p>Rental Period:&nbsp;{products.minimum_rent_period}</p>
+                            <p>Mileage:&nbsp;{products.mileage === null ? "N/A" : products.mileage}</p>
+                            <p>Repair Needed:&nbsp;{products.needing_repair === true ? "Yes" : "No"}</p>
+                        </p>
+                    ))}
+                    {/* Information End */}
+                    <div><span style={{ fontSize: 19, fontFamily: "Lucida Console" }} >USED MILEAGE</span><span style={{ color: 'red' }}>*</span></div>
                     <input
                         type="number"
                         placeholder="Enter Mileage"
