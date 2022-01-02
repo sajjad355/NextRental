@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import data from '../data.json';
 import { Modal, Form, Button } from "react-bootstrap";
 import "./style.css"
+import moment from "moment";
+
 import {
     MDBNavbar,
     MDBNavbarNav,
@@ -90,12 +92,12 @@ export default function App() {
             const date2 = new Date(fromDate);
             const diffTime = Math.abs(date2 - date1);
             const dayDiff = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            if (fromDate > toDate || currentDate > startingDate) {
-                alert("To Date must be Greater than From Date && From Date must be Greater than System Date!")
+            if (fromDate > toDate) {
+                alert("To Date must be Greater than From Date!")
                 setIsOpenBookingvalue(isOpenBookingValue);
             }
             else {
-                if (dayDiff > a[0].minimum_rent_period)
+                if (dayDiff >= a[0].minimum_rent_period)
                     setIsOpenBookingvalue(!isOpenBookingValue);
                 else
                     alert("You have to Rent this for minumum " + a[0].minimum_rent_period + " Days");
@@ -263,9 +265,11 @@ export default function App() {
                         }}
                     /> */}
 
-                    <Form.Control type="date" value={fromDate} onChange={(e) => {
-                        setFromdate(e.target.value);
-                    }} />
+                    <Form.Control type="date" value={fromDate} min={new Date().toISOString().split("T")[0]}
+
+                        onChange={(e) => {
+                            setFromdate(e.target.value);
+                        }} />
 
                     <br />
                     {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
