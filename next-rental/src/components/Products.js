@@ -276,7 +276,7 @@ export default function App() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <span style={{ fontSize: 23, fontFamily: "Lucida Console" }}>Your Estimated Price&nbsp;</span> $<input
+                    <span style={{ fontSize: 23, fontFamily: "Lucida Console" }}>Your Estimated Price</span>($)<input
                         type="number"
                         placeholder="Enter Amount"
                         value={amountPreview}
@@ -397,7 +397,7 @@ export default function App() {
 
                 <Modal.Body>
                     <span style={{ fontsize: 22, fontFamily: "Lucida Console" }}>YOU ARE GOING TO RETUEN PRODUCT...</span> <br /><br />
-                    <span style={{ fontSize: 20, fontFamily: "Lucida Console" }}>Your Total Price is&nbsp;</span> $
+                    <span style={{ fontSize: 20, fontFamily: "Lucida Console" }}>Your Total Price is</span>($)
                     <input
                         value={amountPreview}
                         style={{ border: "0", fontSize: 22, fontFamily: "Lucida Handwriting", background: 'white', fontWeight: 'bold', marginBottom: 10 }}
