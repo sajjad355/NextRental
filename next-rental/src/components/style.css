@@ -7,13 +7,13 @@
   margin-left: 4%;
   padding: 10px;
 }
-.columnGrid{
+.columnGrid {
   display: grid;
   grid-template-columns: auto auto ;
   margin-top:-5px;
   width: 30%;
 }
-.search{
+.search {
     width: 130px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -27,14 +27,14 @@
     transition: width 0.4s ease-in-out;
     box-shadow: 0 0 20px rgb(0 0 0 / 15%);
     text-align: "center";
-  }
-  .TableDesign {
+}
+.TableDesign {
     box-shadow: 0 0 20px rgb(0 0 0 / 36%);
 }
 .search:focus {
     width: 100%;
-  }
+}
 .custom-modal-style {
     width: 10px;
     height: 100px;
-  }
+}
