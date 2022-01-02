@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import data from '../data.json';
 import { Modal, Form, Button } from "react-bootstrap";
 import "./style.css"
-import moment from "moment";
 
 import {
     MDBNavbar,
@@ -12,11 +11,7 @@ import {
     MDBNavbarToggler,
     MDBIcon
 } from 'mdb-react-ui-kit';
-// import Modal from "react-modal";
 import { MDBContainer, } from "mdbreact";
-
-
-// Modal.setAppElement("#root");
 
 export default function App() {
     const [serarchTerm, setSearchTerm] = useState("");
@@ -127,13 +122,6 @@ export default function App() {
                                         <span style={{ color: 'white', fontSize: 22, fontFamily: "Lucida Handwriting" }}>Next Rental</span>
                                     </MDBNavbarLink>
                                 </MDBNavbarItem>
-                                {/* <MDBNavbarItem>
-                                    <MDBNavbarLink className="click" href='#' onClick={toggleModal}><span style={{ marginLeft: 20, color: 'white', fontSize: 18, fontFamily: "Lucida Console" }}>Book</span></MDBNavbarLink>
-                                </MDBNavbarItem>
-                                <MDBNavbarItem>
-                                    <MDBNavbarLink href='#' className="click" onClick={toggleModalReturn}><span style={{ marginLeft: 20, color: 'white', fontSize: 18, fontFamily: "Lucida Console" }}>Return</span></MDBNavbarLink>
-                                </MDBNavbarItem> */}
-
                             </MDBNavbarNav>
                         </div>
                     </MDBContainer>
@@ -212,7 +200,6 @@ export default function App() {
 
 
             {/* Start of Booking Product Process */}
-
             {/* Book Product Initialize */}
             <Modal
                 show={isOpen ? true : false}
@@ -243,6 +230,7 @@ export default function App() {
                         ))}
                     </select>
                     <br />
+
                     {/* Information Start */}
                     {data.filter(product => product.name + "/" + product.code === productBooking).map(products => (
                         <p style={{ fontSize: 22, fontFamily: "Lucida Console" }}>
@@ -253,36 +241,16 @@ export default function App() {
                         </p>
                     ))}
                     {/* Information End */}
+
                     <span style={{ fontSize: 18, fontFamily: "Lucida Console" }} >FROM</span><span style={{ color: 'red' }}>*</span> &nbsp;
-
-                    {/* <input
-                        type="date"
-                        placeholder="Search..."
-                        className="form-Control"
-                        value={fromDate}
-                        onChange={(e) => {
-                            setFromdate(e.target.value);
-                        }}
-                    /> */}
-
                     <Form.Control type="date" value={fromDate} min={new Date().toISOString().split("T")[0]}
 
                         onChange={(e) => {
                             setFromdate(e.target.value);
                         }} />
-
                     <br />
-                    {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+
                     <span style={{ fontSize: 18, fontFamily: "Lucida Console" }} >TO</span><span style={{ color: 'red' }}>*</span>&nbsp;
-                    {/* <input
-                        type="date"
-                        placeholder="Search..."
-                        className="form-Control"
-                        value={toDate}
-                        onChange={(e) => {
-                            setToDate(e.target.value);
-                        }}
-                    /> */}
                     <Form.Control type="date" value={toDate} onChange={(e) => {
                         setToDate(e.target.value);
                     }} />
@@ -320,8 +288,7 @@ export default function App() {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <span style={{ fontsize: 22, fontFamily: "Lucida Console" }}>DO you want to procedure?</span> <br /><br />
-                    {/* <button onClick={toggleModalBookingValueComplted} style={{ fontSize: 18, fontFamily: "Lucida Console", height: 30, marginBottom: 10, marginLeft: 200, backgroundColor: '#2621a0', color: 'white' }}>Yes</button><br /> */}
+                    <span style={{ fontsize: 22, fontFamily: "Lucida Console" }}>Do you want to procedure?</span> <br /><br />
 
                     <button onClick={toggleModalBookingValueComplted} style={{ width: 47, fontSize: 18, fontFamily: "Lucida Console", height: 30, marginBottom: 10, backgroundColor: '#2621a0', marginLeft: 360, color: 'white' }}>Yes</button>
                     &nbsp;
@@ -349,7 +316,6 @@ export default function App() {
                 </Modal.Footer>
             </Modal>
             {/* Booking Product Confirmation */}
-
             {/* End of Booking Product Process */}
 
             {/* Start of Returing Product Process */}
@@ -383,8 +349,8 @@ export default function App() {
                         ))}
                     </select>
                     <br />
+
                     {/* Information Start */}
-                    {console.log(product)}
                     {data.filter(allProduct => allProduct.name + "/" + allProduct.code === product).map(products => (
                         <p style={{ fontSize: 22, fontFamily: "Lucida Console" }}>
                             <p>Name:&nbsp;{products.name}</p>
@@ -394,6 +360,7 @@ export default function App() {
                         </p>
                     ))}
                     {/* Information End */}
+
                     <div><span style={{ fontSize: 19, fontFamily: "Lucida Console" }} >USED MILEAGE</span><span style={{ color: 'red' }}>*</span></div>
                     <input
                         type="number"
@@ -417,6 +384,7 @@ export default function App() {
             </Modal>
             {/* Return Product Initialize */}
 
+            {/* Return Product Confirmation */}
             <Modal
                 show={isOpenReturnValue ? true : false}
                 onRequestClose={toggleModalReturnValue}
@@ -426,6 +394,7 @@ export default function App() {
                 <Modal.Header>
                     <span style={{ fontFamily: "Lucida Handwriting", fontSize: 22 }}> RETURN A PRODUCT!</span> <br /> <br />
                 </Modal.Header>
+
                 <Modal.Body>
                     <span style={{ fontsize: 22, fontFamily: "Lucida Console" }}>YOU ARE GOING TO RETUEN PRODUCT...</span> <br /><br />
                     <span style={{ fontSize: 20, fontFamily: "Lucida Console" }}>Your Total Price is&nbsp;</span> $
@@ -454,6 +423,8 @@ export default function App() {
                     <button onClick={toggleModalReturnValueFinal} style={{ fontSize: 18, fontFamily: "Lucida Console", width: 120, height: 34, marginLeft: 170, background: '#2621a0', color: 'white' }}>Confirm</button><br />
                 </Modal.Footer>
             </Modal>
+            {/* Return Product Confirmation */}
+
             {/* End of Returing Product Process */}
 
 

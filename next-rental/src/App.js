@@ -1,6 +1,5 @@
 import './App.css';
 import Product from './components/Products'
-import { Button, Modal } from 'react-bootstrap';
 
 function App() {
   return (
