@@ -105,7 +105,7 @@ export default function App() {
     }
     return (
         <div className="App">{console.log(day)}
-            <header style={{ backgroundColor: '#2621a0', marginBottom: 30, marginLeft: 0, width: '100%' }}>
+            <header style={{ backgroundColor: '#2621a0', marginBottom: 30, width: '100%' }}>
                 <MDBNavbar expand='lg' >
                     <MDBContainer fluid>
                         <MDBNavbarToggler
@@ -185,7 +185,7 @@ export default function App() {
                                 <td>{m.needing_repair === true ? "Yes" : "No"}</td>
                                 <td>{m.durability}</td>
                                 <td>{m.max_durability}</td>
-                                <td>{m.mileage === "" || m.mileage === null ? "N/A" : m.mileage + day * 10}</td>
+                                <td>{m.mileage === "" || m.mileage === null ? "N/A" : m.mileage }</td>
                                 <td>{m.price}</td>
                                 <td>{m.minimum_rent_period}</td>
                             </tr>
@@ -257,9 +257,9 @@ export default function App() {
                 </Modal.Body>
                 <br /><br />
                 <Modal.Footer>
-                    <button onClick={toggleModalBookingValue} style={{ width: 108, fontSize: 18, fontFamily: "Lucida Console", height: 30, marginBottom: 10, backgroundColor: '#2621a0', color: 'white' }}>Book Now</button>
+                    <Button onClick={toggleModalBookingValue} style={{ width: 108, fontSize: 18, fontFamily: "Lucida Console", height: 40, marginBottom: 10, backgroundColor: '#2621a0', color: 'white' }}>Book</Button>
                     &nbsp;
-                    <button onClick={toggleModal} style={{ width: 108, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 30, background: 'red', color: 'white' }}>Close</button>
+                    <Button variant="danger" onClick={toggleModal} style={{ width: 108, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 40, color: 'white' }}>Close</Button>
 
                 </Modal.Footer>
             </Modal>
@@ -290,9 +290,9 @@ export default function App() {
                 <Modal.Footer>
                     <span style={{ fontsize: 22, fontFamily: "Lucida Console" }}>Do you want to procedure?</span> <br /><br />
 
-                    <button onClick={toggleModalBookingValueComplted} style={{ width: 47, fontSize: 18, fontFamily: "Lucida Console", height: 30, marginBottom: 10, backgroundColor: '#2621a0', marginLeft: 360, color: 'white' }}>Yes</button>
+                    <Button onClick={toggleModalBookingValueComplted} style={{ width: 58, fontSize: 18, fontFamily: "Lucida Console", height: 37, marginBottom: 10, backgroundColor: '#2621a0',  color: 'white' }}>Yes</Button>
                     &nbsp;
-                    <button onClick={toggleBookingValueCancel} style={{ width: 47, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 30, background: 'red', color: 'white' }}>No</button>
+                    <Button variant="danger" onClick={toggleBookingValueCancel} style={{ width: 58, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 37, color: 'white' }}>No</Button>
                 </Modal.Footer>
             </Modal>
             {/* Estimated Price After Booking Product */}
@@ -312,7 +312,7 @@ export default function App() {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <button onClick={toggleModalBookingValueCompltedFinal} style={{ fontSize: 18, fontFamily: "Lucida Console", width: 120, height: 30, marginLeft: 158, background: '#2621a0', color: 'white' }}>Main Menu</button><br />
+                    <Button onClick={toggleModalBookingValueCompltedFinal} style={{ fontSize: 18, fontFamily: "Lucida Console", width: 150, height: 40, background: '#2621a0', color: 'white' }}>Main Menu</Button><br />
                 </Modal.Footer>
             </Modal>
             {/* Booking Product Confirmation */}
@@ -377,9 +377,9 @@ export default function App() {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <button onClick={toggleModalReturnValue} style={{ width: 47, fontSize: 18, fontFamily: "Lucida Console", height: 30, marginBottom: 10, backgroundColor: '#2621a0', marginLeft: 360, color: 'white' }}>Yes</button>
+                    <Button onClick={toggleModalReturnValue} style={{ width: 58, fontSize: 18, fontFamily: "Lucida Console", height: 40, marginBottom: 10, backgroundColor: '#2621a0', color: 'white' }}>Yes</Button>
                     &nbsp;
-                    <button onClick={toggleModalReturn} style={{ width: 47, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 30, background: 'red', color: 'white' }}>No</button>
+                    <Button variant="danger" onClick={toggleModalReturn} style={{ width: 58, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 40, color: 'white' }}>No</Button>
                 </Modal.Footer>
             </Modal>
             {/* Return Product Initialize */}
@@ -420,7 +420,7 @@ export default function App() {
 
                 <Modal.Footer>
                     <span style={{ fontsize: 22, fontFamily: "Lucida Console" }}>DO you want to procedure?</span> <br /><br />
-                    <button onClick={toggleModalReturnValueFinal} style={{ fontSize: 18, fontFamily: "Lucida Console", width: 120, height: 34, marginLeft: 170, background: '#2621a0', color: 'white' }}>Confirm</button><br />
+                    <Button onClick={toggleModalReturnValueFinal} style={{ fontSize: 18, fontFamily: "Lucida Console", width: 120, height: 41,  background: '#2621a0', color: 'white' }}>Confirm</Button><br />
                 </Modal.Footer>
             </Modal>
             {/* Return Product Confirmation */}
@@ -429,7 +429,7 @@ export default function App() {
 
 
 
-            <div className="footer-copyright text-center py-3" style={{ backgroundColor: '#2621a0', color: 'white', marginTop: 0, marginLeft: 0, width: '100%' }}>
+            <div className="footer-copyright text-center py-3" style={{ backgroundColor: '#2621a0', color: 'white', marginTop: 0, width: '100%' }}>
                 <MDBContainer fluid>
                     Copyright&nbsp;&copy; {new Date().getFullYear()}
                 </MDBContainer>
