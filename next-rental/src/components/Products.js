@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import data from '../data.json';
-import { Modal, Form, Button } from "react-bootstrap";
+import { Modal, Form, Button, Table, InputGroup, FormControl  } from "react-bootstrap";
 import "./style.css"
 
 import {
@@ -105,30 +105,8 @@ export default function App() {
     }
     return (
         <div className="App">{console.log(day)}
-            <header style={{ backgroundColor: '#2621a0', marginBottom: 30, width: '100%' }}>
-                <MDBNavbar expand='lg' >
-                    <MDBContainer fluid>
-                        <MDBNavbarToggler
-                            aria-controls='navbarExample01'
-                            aria-expanded='false'
-                            aria-label='Toggle navigation'
-                        >
-                            <MDBIcon fas icon='bars' />
-                        </MDBNavbarToggler>
-                        <div className='collapse navbar-collapse' id='navbarExample01'>
-                            <MDBNavbarNav right className='mb-2 mb-lg-0'>
-                                <MDBNavbarItem active>
-                                    <MDBNavbarLink aria-current='page' href='#' onMouseOver="this.style.color='#0F0'">
-                                        <span style={{ color: 'white', fontSize: 22, fontFamily: "Lucida Handwriting" }}>Next Rental</span>
-                                    </MDBNavbarLink>
-                                </MDBNavbarItem>
-                            </MDBNavbarNav>
-                        </div>
-                    </MDBContainer>
-                </MDBNavbar>
-            </header>
             <div className="center">
-                <input
+                {/* <input
                     type="text"
                     placeholder="Search..."
                     className="form-Control search"
@@ -136,9 +114,28 @@ export default function App() {
                     onChange={(e) => {
                         setSearchTerm(e.target.value);
                     }}
-                />
+                /> */}
 
-                <div className="columnGrid">
+
+            <div className="float-right mt-4" style={{marginRight:20}}>
+            <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+               </svg>
+              </InputGroup.Text>
+                    <FormControl
+                     placeholder="Name or Type"
+                     aria-label="Search"
+                     style={{height:50}}
+                     aria-describedby="basic-addon1"
+                     onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                    }}
+                   />
+            </InputGroup>
+            </div>
+
+                {/* <div className="columnGrid">
                     <div>
                         <Button onClick={toggleModal} style={{ fontsize: 21, color: "white", fontFamily: "Lucida Console", marginTop: 0, marginBottom: 10, width: "100%", display: 'block' }}>
                             Book
@@ -150,10 +147,12 @@ export default function App() {
                             Return
                         </Button>
                     </div>
-                </div>
-                <table className="table table-hover table-striped TableDesign" style={{ width: "1330px", marginBottom: 80 }}>
+                </div> */}
+                <div style={{marginRight:20, border: '1px solid white'}} className="TableDesign">
+                <Table responsive="sm" responsive="md" responsive="xs" responsive="lg" responsive="xl" striped hover>
                     <thead className="" style={{ backgroundColor: '#2621a0' }}>
                         <tr>
+                            <th style={{ fontsize: 21, color: "white", fontFamily: "Lucida Console" }}></th>
                             <th style={{ fontsize: 21, color: "white", fontFamily: "Lucida Console" }}>Name</th>
                             <th style={{ fontsize: 21, color: "white", fontFamily: "Lucida Console" }}>Type </th>
                             <th style={{ fontsize: 21, color: "white", fontFamily: "Lucida Console" }}>Availability</th>
@@ -177,8 +176,9 @@ export default function App() {
                             ) {
                                 return val;
                             }
-                        }).map((m) => (
+                        }).map((m,index) => (
                             <tr key={m.code}>
+                                <td>{index+1}</td>
                                 <td>{m.name}</td>
                                 <td>{m.type}</td>
                                 <td>{m.availability === true ? "Yes" : "No"}</td>
@@ -191,13 +191,14 @@ export default function App() {
                             </tr>
                         ))}
                     </tbody>
-                </table>
-                <div className="footer-copyright text-center" style={{ backgroundColor: '#2621a0', color: 'white', marginBottom: 20, marginTop: -80, width: 1330, height: 5 }}>
-                    <MDBContainer fluid>
-                    </MDBContainer>
+                </Table>
                 </div>
             </div>
-
+        <div className="mb-5" style={{ marginRight:31, display: 'flex', justifyContent: 'flex-end' }}>
+          <Button onClick={toggleModal} style={{width:85}} >Book</Button>
+          <Button onClick={toggleModalReturn} style={{marginLeft:5, width:85}}   variant="danger">Return</Button>
+         </div>
+            {/* <Button variant="info">Info</Button>{' '} */}
 
             {/* Start of Booking Product Process */}
             {/* Book Product Initialize */}
@@ -212,7 +213,7 @@ export default function App() {
 
                 <Modal.Body>
                     <div><span style={{ fontSize: 18, fontFamily: "Lucida Console" }} >SELECT PRODUCT</span><span style={{ color: 'red' }}>*</span></div>
-                    <select
+                    {/* <select
                         align="center"
                         className="form-control"
                         name="product"
@@ -228,7 +229,31 @@ export default function App() {
                                 {val.name}/{val.code}
                             </option>
                         ))}
+                    </select> */}
+
+                <InputGroup className="mb-3">
+                <select
+                        align="center"
+                        className="form-control"
+                        name="product"
+                        value={productBooking}
+                        onChange={(e) => setProductBooking(e.target.value)}
+                        required={true}
+                        // style={{ width: '100%' }}
+                    >
+                        <option value="" disabled>-- Product --</option>
+
+                        {data.map((val) => (
+                            <option text={val.code}>
+                                {val.name}/{val.code}
+                            </option>
+                        ))}
                     </select>
+                <InputGroup.Text id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                  <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                </svg>
+              </InputGroup.Text>
+              </InputGroup>
                     <br />
 
                     {/* Information Start */}
@@ -257,9 +282,9 @@ export default function App() {
                 </Modal.Body>
                 <br /><br />
                 <Modal.Footer>
-                    <Button onClick={toggleModalBookingValue} style={{ width: 108, fontSize: 18, fontFamily: "Lucida Console", height: 40, marginBottom: 10, backgroundColor: '#2621a0', color: 'white' }}>Book</Button>
+                    <Button onClick={toggleModalBookingValue} style={{ width: 108, fontSize: 18, fontFamily: "Lucida Console", height: 40, marginBottom: 10, backgroundColor: '#2621a0', color: 'white' }}>Yes</Button>
                     &nbsp;
-                    <Button variant="danger" onClick={toggleModal} style={{ width: 108, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 40, color: 'white' }}>Close</Button>
+                    <Button variant="danger" onClick={toggleModal} style={{ width: 108, marginTop: -2, fontSize: 18, fontFamily: "Lucida Console", height: 40, color: 'white' }}>No</Button>
 
                 </Modal.Footer>
             </Modal>
@@ -332,12 +357,13 @@ export default function App() {
                 <Modal.Body>
                     <div><span style={{ fontSize: 19, fontFamily: "Lucida Console" }} >SELECT PRODUCT</span><span style={{ color: 'red' }}>*</span></div>
 
-                    <select
+                    <InputGroup className="mb-3">
+                  <select
                         className="form-control"
                         name="product"
                         value={product}
                         onChange={(e) => setProduct(e.target.value)}
-                        style={{ width: '100%' }}
+                        // style={{ width: '100%' }}
                         required
                     >
                         <option value="" disabled>-- Product --</option>
@@ -348,6 +374,11 @@ export default function App() {
                             </option>
                         ))}
                     </select>
+                <InputGroup.Text id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                  <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                </svg>
+              </InputGroup.Text>
+              </InputGroup>
                     <br />
 
                     {/* Information Start */}
@@ -427,13 +458,6 @@ export default function App() {
 
             {/* End of Returing Product Process */}
 
-
-
-            <div className="footer-copyright text-center py-3" style={{ backgroundColor: '#2621a0', color: 'white', marginTop: 0, width: '100%' }}>
-                <MDBContainer fluid>
-                    Copyright&nbsp;&copy; {new Date().getFullYear()}
-                </MDBContainer>
-            </div>
         </div>
     );
 }
