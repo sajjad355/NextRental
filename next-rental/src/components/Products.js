@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import data from '../../src/data/data.json';
-import { Modal, Form, Button, Table, InputGroup, FormControl } from "react-bootstrap";
+import { Button, Table, InputGroup, FormControl } from "react-bootstrap";
 import BookProduct from '../BookProduct/Booking'
 import ReturnProduct from '../ReturnProduct/Return'
 import "./style.css"
