@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import data from '../data/data.json';
 import { Modal, Button, InputGroup } from "react-bootstrap";
 
-export default function InitialiazeBooking(status) {
+export default function InitialiazeBooking(props) {
     const [isOpenReturn, setIsOpenReturn] = useState(false);
     const [isOpenReturnValue, setIsOpenReturnvalue] = useState(false);
     const [product, setProduct] = useState("");
@@ -12,9 +12,10 @@ export default function InitialiazeBooking(status) {
     const [rentPeriod, setRentPeriod] = useState("");
     const [returnModal, setReturnModal] = useState(true);
 
-    // useEffect(() => {
-    //     setReturnModal(true);
-    // }, [toggleModalReturn]);
+    useEffect(() => {
+        console.log(props.status)
+        setReturnModal(props.status);
+    }, []);
 
     function toggleModalReturn() {
         setIsOpenReturn(!isOpenReturn);

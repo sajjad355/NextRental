@@ -93,7 +93,7 @@ export default function App() {
             </div>
             <div>
                 {isOpen ? <BookProduct status={isOpen} /> : ""}
-                {isOpenReturn ? <ReturnProduct status={isOpen} /> : ""}
+                {isOpenReturn ? <ReturnProduct status={isOpenReturn} /> : ""}
             </div>
         </div >
     );
