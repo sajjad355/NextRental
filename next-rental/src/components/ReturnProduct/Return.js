@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import data from '../data/data.json';
+import data from '../../data/data.json';
 import { Modal, Button, InputGroup } from "react-bootstrap";
 
 export default function InitialiazeBooking(props) {
