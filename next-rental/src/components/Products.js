@@ -92,8 +92,8 @@ export default function App() {
                 <Button onClick={toggleModalReturn} style={{ marginLeft: 5, width: 85 }} variant="danger">Return</Button>{console.log(isOpen)}
             </div>
             <div>
-                {isOpen === true ? <BookProduct status={isOpen} /> : ""}
-                {isOpenReturn === true ? <ReturnProduct status={isOpen} /> : ""}
+                {isOpen ? <BookProduct status={isOpen} /> : ""}
+                {isOpenReturn ? <ReturnProduct status={isOpen} /> : ""}
             </div>
         </div >
     );
