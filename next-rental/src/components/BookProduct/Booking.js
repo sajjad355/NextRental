@@ -178,7 +178,7 @@ export default function Booking(props) {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={toggleModalBookingValueCompltedFinal} style={{ fontSize: 18, fontFamily: "Lucida Console", width: 150, height: 40, background: '#2621a0', color: 'white' }}>Main Menu</Button><br />
+                    <Button onClick={toggleModalBookingValueCompltedFinal} style={{ fontSize: 18, fontFamily: "Lucida Console", width: 150, height: 40, background: '#2621a0', color: 'white' }}>Done</Button><br />
                 </Modal.Footer>
             </Modal>
             {/* Booking Product Confirmation */}
